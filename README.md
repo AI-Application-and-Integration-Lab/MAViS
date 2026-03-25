@@ -2,7 +2,7 @@
 
 🚀 **MAViS** is a training-free multi-agent pipeline for referring video object segmentation.
 
-🎉 To be accepted in **IEEE Transactions on Consumer Electronics (TCE)**
+🎉 To be accepted in **IEEE Transactions on Consumer Electronics (TCE)** JCR Q1
 
 ---
 
