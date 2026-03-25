@@ -1,0 +1,137 @@
+# MAViS: A Multi-Agent Approach for Training-Free Referring Video Object Segmentation
+
+🚀 **MAViS** is a training-free multi-agent pipeline for referring video object segmentation.
+
+🎉 To be accepted in **IEEE Transactions on Consumer Electronics (TCE)**
+
+---
+
+## ✨ Highlights
+
+- Training-free referring video object segmentation
+- Multi-agent pipeline (Video Summary → Keyframe Selection → Object Grounding)
+- Efficient inference with local MLLM (Qwen-2.5VL-7B), the system runs on a 24G GPU
+- Achieves state-of-the-art (SOTA✨) performance across multiple benchmarks (Ref-Youtube-VOS, Ref-DAVIS17, MeViS)
+
+---
+
+## 📦 Installation
+
+### 1️⃣ Create environment
+
+```bash
+conda env create -f environment.yml
+conda activate mavis
+pip install -r requirements.txt
+```
+### 2️⃣ Install SAM2
+```bash
+git clone https://github.com/facebookresearch/sam2
+cd sam2
+pip install -e .
+```
+Download Checkpoints
+```bash
+cd checkpoints && \
+./download_ckpts.sh && \
+cd ..
+```
+### 🤖 Qwen2.5-VL Model
+
+MAViS uses the Qwen2.5-VL-7B-Instruct model as the multimodal backbone.
+
+The model will be automatically downloaded from Hugging Face when you run the pipeline for the first time:
+
+👉 https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct
+
+**Note:**
+- If download fails (e.g., due to network or rate limits), you may need to login via:
+  ```bash
+  huggingface-cli login
+  ```
+### ⚠️ Optional (Performance Boost)
+To accelerate inference (especially for long videos), you can install FlashAttention:
+```bash
+pip install flash-attn
+```
+
+### ⚠️Transformers Version
+We recommend:
+```bash
+pip install "transformers>=4.50"
+```
+### 📁 Project Structure
+```bash
+MAViS/
+├── agents/                     # three core agents
+├── pipeline/
+│   ├── mavis_inference_pipeline.py
+│   ├── benchmark_inference_pipeline.py
+│   └── metrics.py
+├── datasets/
+├── requirements.txt
+├── environment.yml
+└── README.md
+```
+
+## Data Preparation
+Referring Video Object Segmentation
+For Ref-Youtube-VOS and Ref-DAVIS17, data preparation follows [ReferFormer](https://github.com/wjn922/ReferFormer). For [MeViS](https://github.com/henghuiding/MeViS), please follow the data preparation instructions provided in MeViS.
+
+## Evaluation
+Before jumping into the following commands, you may look into the involved scripts and configure the data paths.
+
+### MeViS
+
+Submit your result to the online evaluation [server](https://www.codabench.org/competitions/11420/).
+
+### Ref-YouTube-VOS
+
+Submit your result to the online evaluation [server](https://codalab.lisn.upsaclay.fr/competitions/3282#participate-submit_results).
+
+### Ref-DAVIS-17
+
+### 🚀 Quick Demo (Single Video)
+```bash
+python mavis_inference_pipeline.py \
+  --video_dir /path/to/video_frames \
+  --description "a man in black shirt" \
+  --sam2_checkpoint /path/to/sam2.pt \
+  --sam2_config /path/to/sam2.yaml \
+```
+
+### 🧪 Benchmark Inference
+We provide a unified benchmark script:
+```bash
+python benchmark_inference_pipeline.py \
+  --dataset {referformer,davis,rvos,mevis} \
+  --dataset_root /path/to/dataset \
+  --split {valid_u, valid} \
+  --sam2_checkpoint /path/to/sam2.pt \
+  --sam2_config /path/to/sam2.yaml \
+  --prediction_root outputs \
+```
+## Release Notes
+- **[2026/01/06]** 🔥 Release our training-free Referring Video Object Segmentation GitHub page.
+- **[2025/12/25]** 🎉 Our Paper has been accepted by **IEEE Transactions on Consumer Electronics.**!
+## 🙌 Acknowledgements
+
+This project builds upon several excellent open-source works:
+
+- SAM-2: https://github.com/facebookresearch/sam2
+- Qwen-2.5VL: https://github.com/QwenLM/Qwen3-VL
+
+We sincerely thank the authors for making their code and models publicly available.
+
+## 📄 Citation
+
+If you find this work useful, please consider citing:
+
+```bibtex
+@article{peng2026mavis,
+  title={MAViS: A Multi-Agent Approach for Training-Free Referring Video Object Segmentation},
+  author={Peng, Tai and Chen, Chu-Song},
+  journal={IEEE Transactions on Consumer Electronics},
+  year={2026},
+  publisher={IEEE}
+}
