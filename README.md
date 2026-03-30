@@ -91,6 +91,8 @@ Submit your result to the online evaluation [server](https://codalab.lisn.upsacl
 
 ### Ref-DAVIS-17
 
+Calculated locally based on widely accepted evaluation methods.
+
 ### 🚀 Quick Demo (Single Video)
 ```bash
 python mavis_inference_pipeline.py \
