@@ -49,7 +49,7 @@ The model will be automatically downloaded from Hugging Face when you run the pi
   ```bash
   huggingface-cli login
   ```
-### ⚠️ Optional (Performance Boost)
+### 🚀Optional (Performance Boost)
 To accelerate inference (especially for long videos), you can install FlashAttention:
 ```bash
 pip install flash-attn
